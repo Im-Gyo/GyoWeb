@@ -1,6 +1,5 @@
-package com.myapp.web.springboot.dto;
+package com.myapp.web.springboot.web.dto;
 
-import com.myapp.web.springboot.dto.HelloResponseDto;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat; // assertj도 Junit에서 자동으로 라이브러리 등록(Junit과 비교장점:확실한 자동완성, 추가적으로 라이브러리가 필요없음)
