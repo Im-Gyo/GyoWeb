@@ -20,7 +20,7 @@ public class PostsRepositoryTest {
     @Autowired
     PostsRepository postsRepository;
 
-    @After // Junit에서 단위 테스트가 끝날 때 마다 수행되는 메소드를 지정, 보통은 전체 테스트 할 때 테스트간 데이터 침범을 막기 위해 사용, 여러 테스트가 동시에 수행되면 H2에 데이터가 그대로 남아있어 다음 테스트 실행 시 실패할 수 있음
+    @After // Junit에서 단위 테스트가 끝날 때 마다 수행되는 메소드를 지정(한마디로 테스트 종료 후 실행되는 메소드), 보통은 전체 테스트 할 때 테스트간 데이터 침범을 막기 위해 사용, 여러 테스트가 동시에 수행되면 H2에 데이터가 그대로 남아있어 다음 테스트 실행 시 실패할 수 있음
     public void cleanup() {
         postsRepository.deleteAll(); // postsRepository의 모든 데이터 삭제
     }
