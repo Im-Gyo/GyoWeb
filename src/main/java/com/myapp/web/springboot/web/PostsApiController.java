@@ -1,3 +1,4 @@
+//뷰 템플릿의 영역, 외부요청과 응답에 대한 전반적인 영역을 이야기함.
 package com.myapp.web.springboot.web;
 
 import com.myapp.web.springboot.service.PostsService;

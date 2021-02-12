@@ -1,3 +1,4 @@
+//Entity클래스, DB와 맞닿은 핵심 클래스, Entity클래스를 기준으로 테이블이 생성되고 스키마가 변경됨
 package com.myapp.web.springboot.domain.posts;
 
 import lombok.Builder;
