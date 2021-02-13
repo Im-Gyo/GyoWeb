@@ -2,7 +2,9 @@
 package com.myapp.web.springboot.web;
 
 import com.myapp.web.springboot.service.PostsService;
+import com.myapp.web.springboot.web.dto.PostsResponseDto;
 import com.myapp.web.springboot.web.dto.PostsSaveRequestDto;
+import com.myapp.web.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,7 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/posts/{id}") // 수정
+    @PutMapping("/api/v1/posts/{id}") // 수정 @PutMapping : 기존의 정보를 수정할 때 주로 사용
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){
         return postsService.update(id, requestDto);
     }
