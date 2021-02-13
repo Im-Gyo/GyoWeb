@@ -4,17 +4,26 @@ package com.myapp.web.springboot.web;
 import com.myapp.web.springboot.service.PostsService;
 import com.myapp.web.springboot.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController // 기존 @Controller는 View를 반환하기 위해 사용, 하지만 데이터를 반환(JSON형태)해야하는 경우 @RestController 사용
 public class PostsApiController {
     private final PostsService postsService;
 
-    @PostMapping("/api/v1/posts") // Post로 RequestMapping(컨트롤러로 넘어오는 URL을 다른 뷰로 매핑)함
+    //게시글 등록
+    @PostMapping("/api/v1/posts/") // Post로 RequestMapping(컨트롤러로 넘어오는 URL을 다른 뷰로 매핑)함
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
         return postsService.save(requestDto);
+    }
+
+    @PutMapping("/api/v1/posts/{id}") // 수정
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){
+        return postsService.update(id, requestDto);
+    }
+
+    @GetMapping("/api/v1/posts/{id}") // 조회
+    public PostsResponseDto findById (@PathVariable Long id){
+        return postsService.findById(id);
     }
 }

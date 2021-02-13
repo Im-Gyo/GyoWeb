@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+//JPA기능까지 한번에 테스트 할때는 @SpringBootTest와 TestRestTemplate을 사용한다.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // @SpringBootApplication을 찾아서 테스트를 위한 빈들을 다 생성함 그리고 @MockBean으로 정의된 빈을 찾아서 교체함, WebEnvironment.RANDOM_PORT : 내장 톰캣 사용
 public class PostsApiControllerTest {
