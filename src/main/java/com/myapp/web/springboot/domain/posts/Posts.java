@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity // 테이블과 링크될 클래스임을 나타냄(기본값으로 클래스의 카멜케이스 이름(ex:publicData)을 언더스코어 네이밍(_)으로 테이블 이름을 매칭 ex) SalesManager.java -> sales_manager table
-public class Posts { // 실제 DB의 테이블과 매칭될 클래스(보통 Entity 클래스라고도 함) JPA를 사용하면 DB데이터에 작업할 때 실제 쿼리를 날리기보다, 이 Entity클래스의 수정을 통해 작업
+public class Posts extends BaseTimeEntity{ // 실제 DB의 테이블과 매칭될 클래스(보통 Entity 클래스라고도 함) JPA를 사용하면 DB데이터에 작업할 때 실제 쿼리를 날리기보다, 이 Entity클래스의 수정을 통해 작업
 
     @Id // 해당 테이블의 PK필드(Primary Key)를 나타냄
     @GeneratedValue(strategy = GenerationType.IDENTITY) // PK생성 규칙을 나타냄, 부트 2.0에서는 GenerationType.IDENTITY 옵션을 추가해야 auto_increment(자동증가)가 됨
