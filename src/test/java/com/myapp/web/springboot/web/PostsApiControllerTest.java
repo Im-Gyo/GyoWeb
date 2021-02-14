@@ -3,6 +3,7 @@ package com.myapp.web.springboot.web;
 import com.myapp.web.springboot.domain.posts.Posts;
 import com.myapp.web.springboot.domain.posts.PostsRepository;
 import com.myapp.web.springboot.web.dto.PostsSaveRequestDto;
+import com.myapp.web.springboot.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -42,7 +45,7 @@ public class PostsApiControllerTest {
         //given
         String title = "title";
         String content = "content";
-        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder() // 빌더패턴으로 생성자객체 생성
+        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder() // 빌더패턴으로 인스턴스에 엔티티값 저장
                 .title(title)
                 .content(content)
                 .author("author")
@@ -60,5 +63,39 @@ public class PostsApiControllerTest {
         List<Posts> all = postsRepository.findAll(); //
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
+    }
+
+    @Test
+    public void Posts_수정된다() throws Exception {
+        //given
+        Posts savedPosts = postsRepository.save(Posts.builder() // 빌더패턴으로 인스턴스에 엔티티값 저장
+                .title("title")
+                .content("content")
+                .acthor("author")
+                .build());
+
+        Long updateId = savedPosts.getId();
+        String expectedTitle = "title2";
+        String expectedContent = "Content2";
+
+        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder() // 빌더패턴으로 인스턴스에 필드값 저장
+                .title(expectedTitle)
+                .content(expectedContent)
+                .build();
+
+        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+
+        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto); // HttpEntity : http프로토콜을 이용하는 통신의 헤더와 바디 관련 정보를 저장할 수 있도록 함(이를 상속받은 클래스로 RequestEntity와 ResponseEntity가 있음)
+
+        //when
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class); // exchange : http헤더를 새로 만들 수 있음
+
+        //then
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+        List<Posts> all = postsRepository.findAll();
+        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
+        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
     }
 }

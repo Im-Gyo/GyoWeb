@@ -21,16 +21,16 @@ public class PostsService {
     }
 
     @Transactional
-    public Long update(Long id, PostsUpdateRequestDto requestDto){
+    public Long update(Long id, PostsUpdateRequestDto requestDto){ // 수정, 여기서 DB에 쿼리를 날리는 부분이 없다. 이유는 JPA의 영속성 컨텍스트 때문(영속성컨텍스트 : 엔티티를 영구 저장하는 환경, JPA의 핵심 내용은 엔티티가 영속성 컨텍스트에 포함되어 있냐 아니냐로 갈림) 이런 개념을 더티 체킹이라고 함
         Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id)); // 값이 없을 경우 예외처리(Optional)
 
-        posts.update(requestDto.getTitle(), requestDto.getContent());
+        posts.update(requestDto.getTitle(), requestDto.getContent()); // Entity에 업데이트 값 변경
 
         return id;
     }
 
-    public PostsResponseDto findById(Long id){
+    public PostsResponseDto findById(Long id){ // 조회
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
