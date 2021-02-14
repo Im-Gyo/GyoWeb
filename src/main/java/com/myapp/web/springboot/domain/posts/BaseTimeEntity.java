@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @MappedSuperclass // JPA Entity 클래스들이 BaseTiemEntity를 상속할 경우 필드들(createDate, modifiedDate)도 칼럼으로 인식하도록 함
-@EntityListeners(AuditingEntityListener.class) // BaseTimeEntity 클래스에 Auditing기능을 포함
+@EntityListeners(AuditingEntityListener.class) // BaseTimeEntity 클래스에 Auditing기능(Spring Data JPA에서 시간에 대해서 자동으로 값을 넣어주는 기능)을 포함
 public class BaseTimeEntity {
 
     @CreatedDate // Entity가 생성되어 저장될 때 시간이 자동 저장
