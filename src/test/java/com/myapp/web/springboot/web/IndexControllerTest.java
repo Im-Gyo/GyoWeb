@@ -19,7 +19,7 @@ public class IndexControllerTest {
     @Test
     public void 메인페이지_로딩() throws Exception {
         //when
-        String body = this.restTemplate.getForObject("/",String.class);
+        String body = this.restTemplate.getForObject("/",String.class); //TestRestTemplate를 통해 "/"로 호출했을 때 index.mustache에 포함된 코드들이 있는지 확인
 
         //then
         assertThat(body).contains("스프링 부트로 시작하는 웹서비스");
