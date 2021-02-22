@@ -14,7 +14,7 @@ public class PostsApiController {
     private final PostsService postsService;
 
     //게시글 등록
-    @PostMapping("/api/v1/posts/") // Post로 RequestMapping(컨트롤러로 넘어오는 URL을 다른 뷰로 매핑)함
+    @PostMapping("/api/v1/posts") // Post로 RequestMapping(컨트롤러로 넘어오는 URL을 다른 뷰로 매핑)함
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
         return postsService.save(requestDto);
     }
