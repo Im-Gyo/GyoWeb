@@ -15,12 +15,12 @@ public class PostsApiController {
 
     //게시글 등록
     @PostMapping("/api/v1/posts") // Post로 RequestMapping(컨트롤러로 넘어오는 URL을 다른 뷰로 매핑)함
-    public Long save(@RequestBody PostsSaveRequestDto requestDto){
+    public Long save(@RequestBody PostsSaveRequestDto requestDto){ //@RequestBody : HTTP요청의 body내용을 자바 객체로 매핑
         return postsService.save(requestDto);
     }
 
-    @PutMapping("/api/v1/posts/{id}") // 수정 @PutMapping : 기존의 정보를 수정할 때 주로 사용
-    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){
+    @PutMapping("/api/v1/posts/{id}") // 수정, @PutMapping : 기존의 정보를 수정할 때 주로 사용
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){ // @PathVariable : URL경로에 변수를 넣어줌
         return postsService.update(id, requestDto);
     }
 
