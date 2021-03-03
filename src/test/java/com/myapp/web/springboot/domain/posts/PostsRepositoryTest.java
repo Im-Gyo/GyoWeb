@@ -26,7 +26,6 @@ public class PostsRepositoryTest {
     public void cleanup() {
         postsRepository.deleteAll(); // postsRepository의 모든 데이터 삭제
     }
-
     @Test
     public void 게시글저장_불러오기() {
         //given
@@ -36,7 +35,7 @@ public class PostsRepositoryTest {
         postsRepository.save(Posts.builder() // 테이블 posts에 insert/update 쿼리를 실행, id값이 있으면 update 없으면 insert가 실행됨
                 .title(title)
                 .content(content)
-                .acthor("jywlsh3@naver.com")
+                .author("jywlsh3@naver.com")
                 .build());
 
         //when
@@ -55,7 +54,7 @@ public class PostsRepositoryTest {
         postsRepository.save(Posts.builder()
                 .title("title")
                 .content("content")
-                .acthor("acthor")
+                .author("acthor")
                 .build());
 
         //when

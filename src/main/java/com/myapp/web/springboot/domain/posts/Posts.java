@@ -23,6 +23,12 @@ public class Posts extends BaseTimeEntity{ // 실제 DB의 테이블과 매칭�
     private String content;
 
     private String author;
+/*
+    @Column(nullable = false)
+    private String status;
+
+    @Column(nullable = false)
+    private String category;*/
 
     @Builder // 해당 클래스의 빌더 패턴 클래스 생성, 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함(빌더패턴 관련자료 : https://mommoo.tistory.com/54)
     public Posts(String title, String content, String author){

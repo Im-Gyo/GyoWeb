@@ -71,7 +71,7 @@ public class PostsApiControllerTest {
         Posts savedPosts = postsRepository.save(Posts.builder() // 빌더패턴으로 인스턴스에 엔티티값 저장
                 .title("title")
                 .content("content")
-                .acthor("author")
+                .author("author")
                 .build());
 
         Long updateId = savedPosts.getId();
