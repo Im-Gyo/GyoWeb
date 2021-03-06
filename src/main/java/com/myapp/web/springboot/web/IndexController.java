@@ -1,5 +1,6 @@
 package com.myapp.web.springboot.web;
 
+import com.myapp.web.springboot.config.auth.LoginUser;
 import com.myapp.web.springboot.config.auth.dto.SessionUser;
 import com.myapp.web.springboot.service.PostsService;
 import com.myapp.web.springboot.web.dto.PostsResponseDto;
@@ -17,12 +18,14 @@ public class IndexController {
 
     private final PostsService postsService;
     private final HttpSession httpSession;
-
+    
+    
+    // 기존에 httpSession.getAttribute("user")로 가져오던 세션정보값 개선, 어느 컨트롤러에서든지 @LoginUser만 사용하면 세션 정보를 가져올 수 있음
     @GetMapping("/")
-    public String index(Model model){ // Model : 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장, postsService.findAllDesc()로 가져온 결과를 posts로 index.mustache에 전달
+    public String index(Model model, @LoginUser SessionUser user){ // Model : 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장, postsService.findAllDesc()로 가져온 결과를 posts로 index.mustache에 전달
         model.addAttribute("posts", postsService.findAllDesc());
 
-        SessionUser user = (SessionUser)httpSession.getAttribute("user"); // CustomOAuth2Service에서 로그인 성공시 세션에 SessionUser를 저장, 즉,로그인 성공시httpSession.getAttribute("user") 에서 값을 가져올 수 있음
+        /*SessionUser user = (SessionUser)httpSession.getAttribute("user"); // CustomOAuth2Service에서 로그인 성공시 세션에 SessionUser를 저장, 즉,로그인 성공시httpSession.getAttribute("user") 에서 값을 가져올 수 있음*/
 
         if(user != null){ // 세션에 저장된 값이 있을 때만 model에 userName으로 등록, 세션에 저장된 값이 없으면 로그인 버튼이 보이게 됨
             model.addAttribute("userName", user.getName());
