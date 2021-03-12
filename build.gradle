@@ -41,6 +41,7 @@ dependencies {
         compile('org.springframework.boot:spring-boot-starter-mustache') // 머스테치 의존성 등록
         compile('org.springframework.boot:spring-boot-starter-oauth2-client') // 클라이언트 입장에서 소셜기능 구현시 필요한 의존성
         testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile('org.springframework.security:spring-security-test') // 임의로 인증된 사용자를 추가해서 API만 테스트할 수 있게 함
 }
 
 task wrapper(type: Wrapper) {

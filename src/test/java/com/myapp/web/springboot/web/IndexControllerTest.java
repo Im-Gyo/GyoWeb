@@ -17,7 +17,7 @@ public class IndexControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void 메인페이지_로딩() throws Exception {
+    public void 메인페이지_로딩() {
 
         //when
         String body = this.restTemplate.getForObject("/",String.class); //TestRestTemplate를 통해 "/"로 호출했을 때 index.mustache에 포함된 코드들이 있는지 확인
